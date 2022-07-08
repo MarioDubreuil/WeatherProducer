@@ -19,6 +19,7 @@ try
             {
                 Value = JsonConvert.SerializeObject(new Weather(state, 70))
             });
+        Console.WriteLine(response.Value);
     }
 }
 catch (ProduceException<Null, string> exc)
