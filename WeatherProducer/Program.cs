@@ -17,7 +17,10 @@ try
             "weather-topic",
             new Message<Null, string>
             {
-                Value = JsonConvert.SerializeObject(new Weather(state, 70))
+                Value =
+                    Char.IsLower(state[0])
+                        ? JsonConvert.SerializeObject(new Weather(state, 70))
+                        : JsonConvert.SerializeObject(new Address("US", state, "Dallas"))
             });
         Console.WriteLine(response.Value);
     }
@@ -28,3 +31,5 @@ catch (ProduceException<Null, string> exc)
 }
 
 public record Weather(string State, int Temperature);
+
+public record Address(string Country, string State, string City);
